@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-setting',
@@ -6,10 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./setting.page.scss'],
 })
 export class SettingPage implements OnInit {
+  intervals: any[] = [{ id:1, name: "1 Hour"},{id:2,name: "2 Hours"},{id:3,name: "3 Hours"},{id:4,name: "3 Hours"}];
+  private interval = 1;
+  selelectedIntervals: number;
 
-  constructor() { }
 
-  ngOnInit() {
+  constructor(private storage:Storage) {
   }
+
+  async ngOnInit() {
+    //create a storage
+    await this.storage.create()
+    // get the selection of the interval from storage
+    let selelectedIntervals = await this.storage.get("interval")
+    // set the storage interval for selection
+    this.interval = selelectedIntervals
+    
+  }
+
+  async setInterval(){     
+    // set the selection of the interval to storage
+    await this.storage.set("interval", this.interval)
+    console.log(this.interval)
+  }
+
 
 }

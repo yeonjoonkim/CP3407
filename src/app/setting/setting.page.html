@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title>Setting</ion-title>
 
-        <!-- Hamburger -->
+        <!-- menu -->
         <ion-buttons slot="start">
             <ion-menu-button autoHide="false"></ion-menu-button>
         </ion-buttons>
@@ -11,5 +11,15 @@
 </ion-header>
 
 <ion-content>
-    <!-- Content -->
+    <ion-list>
+
+        <ion-item>
+            <ion-label>Session Refresh Interval</ion-label>
+            <ion-select [(ngModel)]="interval" (ionChange)="setInterval()">
+                <ion-select-option *ngFor='let i of intervals' [value]='i.id'> {{i.name}}</ion-select-option>
+            </ion-select>
+
+        </ion-item>
+
+    </ion-list>
 </ion-content>

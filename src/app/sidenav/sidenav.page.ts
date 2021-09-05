@@ -19,7 +19,7 @@ export class SidenavPage implements OnInit {
       icon: 'partly-sunny'
     },
     {
-      name: 'Device',
+      name: 'Device Management',
       link: '/nav/device',
       icon: 'hardware-chip'
     },

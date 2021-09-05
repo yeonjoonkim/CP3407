@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title>Home</ion-title>
 
-        <!-- Hamburger -->
+        <!-- menu -->
         <ion-buttons slot="start">
             <ion-menu-button autoHide="false"></ion-menu-button>
         </ion-buttons>
@@ -11,5 +11,31 @@
 </ion-header>
 
 <ion-content>
-    <!-- Content -->
+    <div class="updated_date">
+        <p>Last Update: 2/03/2021 PM 3: 30 </p>
+    </div>
+    <div class='weather_img'>
+        <p>weather image</p>
+    </div>
+    <ion-grid>
+        <ion-row>
+            <div class="weather_txt">
+                <pre>
+                    Tempurature: 36
+                    Humid: 36 
+                </pre>
+            </div>
+        </ion-row>
+        <ion-row class="device status">
+            <ion-col>
+                <pre>
+                    Device status
+
+                        Generator      on
+                        Sensor         on
+                        Anemometer     off
+                </pre>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
