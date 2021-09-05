@@ -29,5 +29,5 @@ export class SettingPage implements OnInit {
     await this.storage.set("interval", this.interval)
   }
 
-
+  
 }
