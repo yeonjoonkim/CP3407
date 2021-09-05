@@ -12,14 +12,11 @@
 
 <ion-content>
     <ion-list>
-
         <ion-item>
             <ion-label>Session Refresh Interval</ion-label>
             <ion-select [(ngModel)]="interval" (ionChange)="setInterval()">
                 <ion-select-option *ngFor='let i of intervals' [value]='i.id'> {{i.name}}</ion-select-option>
             </ion-select>
-
         </ion-item>
-
     </ion-list>
 </ion-content>
