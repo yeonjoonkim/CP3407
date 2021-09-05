@@ -1,0 +1,18 @@
+{
+  "targets": {
+    "weatherstation-1aa07": {
+      "hosting": {
+        "app": [
+          "weatherstation-1aa07"
+        ]
+      }
+    },
+    "graceful-wall-317205": {
+      "hosting": {
+        "app": [
+          "graceful-wall-317205"
+        ]
+      }
+    }
+  }
+}
