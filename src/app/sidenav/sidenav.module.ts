@@ -8,13 +8,15 @@ import { SidenavPageRoutingModule } from './sidenav-routing.module';
 
 import { SidenavPage } from './sidenav.page';
 
+
+import { UpdateInfoComponent } from '../update-info/update-info.component';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SidenavPageRoutingModule
+    SidenavPageRoutingModule,
   ],
-  declarations: [SidenavPage]
+  declarations: [SidenavPage, UpdateInfoComponent]
 })
 export class SidenavPageModule {}

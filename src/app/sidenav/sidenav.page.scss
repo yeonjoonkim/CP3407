@@ -8,7 +8,11 @@ h1 {
     width: 50px;
 }
 
-.headingBtn {
+ion-button {
+    fill: solid;
+    font-weight: bold;
+    color: white;
+    width: 80px;
     margin: 20px;
     font-size: 12px;
 }

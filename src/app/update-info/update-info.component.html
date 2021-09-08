@@ -1,3 +1,34 @@
-<p>
-  update-info works!
-</p>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title class="info_title">
+            Update Password
+        </ion-title>
+        <ion-buttons class="btn" (click)="cancel()" slot="start">
+            Back
+        </ion-buttons>
+        <ion-buttons class="btn" (click)="updateInfo()" slot="end">
+            Update
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+
+    <ion-list>
+        <ion-item>
+            <ion-label position="stacked">Current Password<span style="color: #fe7b51">*</span></ion-label>
+            <ion-input type="password" [(ngModel)]="currentPassword"></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <ion-label position="stacked">New Password<span style="color: #fe7b51">*</span></ion-label>
+            <ion-input type="password" [(ngModel)]="confirmNewPassword1"></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+            <ion-label position="stacked">Confirm New Password<span style="color: #fe7b51">*</span></ion-label>
+            <ion-input type="password" [(ngModel)]="confirmNewPassword2"></ion-input>
+        </ion-item>
+    </ion-list>
+</ion-content>

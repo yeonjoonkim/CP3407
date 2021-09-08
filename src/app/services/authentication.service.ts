@@ -103,5 +103,7 @@ export class AuthenticationService {
   checkDevice(){
     this.deviceInfo = this.device.getDeviceInfo();
   }
+
+
   
 }
