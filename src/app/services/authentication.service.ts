@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject} from 'rxjs';
 import { Storage } from '@ionic/storage';
-import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { DeviceDetectorService } from "ngx-device-detector";
 
 
 @Injectable({
@@ -11,8 +11,11 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class AuthenticationService {
   //check is Authenticated
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
-  constructor(private storage: Storage, private firestore: AngularFirestore, private router: Router) {
-    this.loadToken()
+  private deviceInfo = null;
+  private timestamp: Date = new Date();
+  constructor(private storage: Storage, private firestore: AngularFirestore, private device: DeviceDetectorService) {
+    this.loadToken();
+    this.checkDevice();
   }
 
   async loadToken(){
@@ -59,19 +62,46 @@ export class AuthenticationService {
           this.storage.set("RATE", userList[i].rate);
           this.isAuthenticated.next(true);
           accessGrant = true
+          this.firestore.collection('loginLog').ref.add({
+            acessState: accessGrant,
+            id: inputId,
+            password: inputPwd,
+            deviceInfo: this.deviceInfo,
+            date: this.timestamp
+          })
         }
       }
     }
-    // return boolean
+    if (accessGrant === false){
+      this.firestore.collection('loginLog').ref.add({
+        acessState: accessGrant,
+        id: inputId,
+        password: inputPwd,
+        deviceInfo: this.deviceInfo,
+        date: this.timestamp
+      })
+    }
     return accessGrant
   }
 
   logout(){
     //empty storage and isAuthentication = false
     this.isAuthenticated.next(false);
+    this.storage.get("ID").then(val =>
+      this.firestore.collection('loginLog').ref.add({
+        acessState: 'logout',
+        id: val,
+        deviceInfo: this.deviceInfo,
+        date: this.timestamp
+      })
+      )
     this.storage.remove("TOKEN_KEY");
     this.storage.remove("RATE");
     this.storage.remove("ID");
   }
 
+  checkDevice(){
+    this.deviceInfo = this.device.getDeviceInfo();
+  }
+  
 }
