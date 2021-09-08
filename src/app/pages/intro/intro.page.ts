@@ -23,7 +23,7 @@ export class IntroPage implements AfterContentChecked {
     pagination: true
   };
 
-  constructor(private storage: Storage, private router: Router) { }
+  constructor(private storage: Storage, private router: Router) {}
   ngAfterContentChecked() {
     if (this.swiper){
     this.swiper.updateSwiper({});
@@ -41,7 +41,10 @@ export class IntroPage implements AfterContentChecked {
   async start(){
     //set START_KEY = True
     await this.storage.set('START_KEY', 'true')
-    this.router.navigateByUrl('/login', {replaceUrl: true})
+    this.router.navigateByUrl('login', {replaceUrl: true})
   }
 
+  ngOnDestroy(){
+    console.log("sss")
+  }
 }

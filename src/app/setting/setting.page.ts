@@ -20,9 +20,11 @@ export class SettingPage implements OnInit {
     //create a storage
     await this.storage.create();
     // get the selection of the interval from storage
-    let selelectedIntervals = await this.storage.get("interval")
+    await this.storage.get("interval").then(val =>{
+      this.interval = val;
+    })
     // set the storage interval for selection
-    this.interval = selelectedIntervals
+    
   }
 
   async setInterval(){     
