@@ -31,14 +31,14 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: '/nav/home',
+        redirectTo: '/login',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/nav/home',
+    redirectTo: '/login',
     pathMatch: 'full'
   }
 ];

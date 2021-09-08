@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
+
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.page.html',
@@ -17,7 +18,7 @@ export class SettingPage implements OnInit {
 
   async ngOnInit() {
     //create a storage
-    await this.storage.create()
+    await this.storage.create();
     // get the selection of the interval from storage
     let selelectedIntervals = await this.storage.get("interval")
     // set the storage interval for selection

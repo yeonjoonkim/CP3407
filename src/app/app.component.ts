@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -10,15 +10,13 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   items: Observable<any[]>;
-  constructor(private firestore: AngularFirestore) {
-    this.items = firestore.collection('items').valueChanges();
-    this.testFirebaseConnection()
+  constructor(private storage: Storage) {
   }
 
-  //test connection of firebase
-  testFirebaseConnection(){
-    this.firestore.collection('test').ref.get().then((snapshot) => {snapshot.forEach(doc =>
-      doc.ref.update({test: "ok"}))
-    })
-  }
+    /// TODO: NEW SET UP THE STORAGE
+    async ngOnInit() {
+      //create a storage
+      await this.storage.create();
+    }
+
 }

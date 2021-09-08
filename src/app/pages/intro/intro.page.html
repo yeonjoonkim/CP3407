@@ -1,0 +1,21 @@
+<ion-content>
+
+    <swiper #swiper [config]="config" [allowTouchMove]="true">
+
+        <ng-template swiperSlide>
+            <img src="../assets/intro/slide1.jpg">
+            <h1>Control The Weahter With Us</h1>
+            <ion-button class='nxt-btn' (click)='next()' fill="outline" color='light'>Next</ion-button>
+        </ng-template>
+
+        <ng-template swiperSlide>
+            <img src="../assets/intro/slide1.jpg">
+            <h1>Control The Weahter With Us</h1>
+            <ion-button class='nxt-btn' (click)='start()' fill="outline" color='light'>Start</ion-button>
+        </ng-template>
+
+    </swiper>
+
+
+
+</ion-content>
