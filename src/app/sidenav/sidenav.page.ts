@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router, RouterEvent } from '@angular/router';
 
+import {AuthenticationService} from "../services/authentication.service"
+import {UserService} from "../services/user.service"
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.page.html',
@@ -9,9 +13,9 @@ import { Router, RouterEvent } from '@angular/router';
 })
 
 export class SidenavPage implements OnInit {
-
+  private rate: number;
+  userName: string;
   active = '';
-
   NAV = [
     {
       name: 'Home',
@@ -42,12 +46,27 @@ export class SidenavPage implements OnInit {
     }
   ]
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthenticationService, private userService: UserService, private storage: Storage) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.active = event.url
     })
   }
 
-  ngOnInit() { }
+  async ngOnInit() {
+    this.storage.create();
+    this.storage.get("ID").then(val => {
+      this.userName = val
+    })
+    this.storage.get("RATE").then(val => {
+      this.rate = val
+    })
+  }
+
+  async logout(){
+    //empty local storage
+    this.authService.logout();
+    //navigate to login page
+    this.router.navigateByUrl('login', {replaceUrl: true});
+  }
 
 }
