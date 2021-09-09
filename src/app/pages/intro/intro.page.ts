@@ -20,7 +20,7 @@ export class IntroPage implements AfterContentChecked {
 
   config: SwiperOptions = {
     slidesPerView: 1,
-    pagination: true
+    pagination: true,
   };
 
   constructor(private storage: Storage, private router: Router) {}
