@@ -17,6 +17,11 @@ export class AppComponent {
     async ngOnInit() {
       //create a storage
       await this.storage.create();
+      this.storage.get("interval").then(val =>{
+        if (val === null || val === undefined){
+          this.storage.set("interval", 1)
+        }
+      });
     }
 
 }

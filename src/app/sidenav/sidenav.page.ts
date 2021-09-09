@@ -60,12 +60,6 @@ export class SidenavPage implements OnInit {
     this.storage.get("RATE").then(val => {
       this.rate = val
     })
-    this.storage.get("interval").then(val =>{
-      console.log(val)
-      if (val === null || val === undefined){
-        this.storage.set("interval", 1)
-      }
-    });
   }
 
   async logout(){

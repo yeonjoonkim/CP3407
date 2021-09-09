@@ -3,7 +3,7 @@
         <ion-header>
             <ion-toolbar>
 
-                <ion-grid>
+                <ion-grid class="detail">
                     <ion-row>
                         <ion-col>
                             <ion-icon class="icon" name="person-sharp"></ion-icon>
@@ -15,11 +15,14 @@
                     </ion-row>
                     <ion-row>
                         <ion-col>
-                            <ion-button class="headingBtn" (click)="logout()">Log out</ion-button>
+                            <div class="heading-btn" (click)="logout()">
+                                Log out
+                            </div>
                         </ion-col>
                         <ion-col>
-                            <ion-button class="headingBtn" (click)="update()">Update
-                            </ion-button>
+                            <div class="heading-btn" (click)="update()">
+                                Update
+                            </div>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
@@ -27,15 +30,15 @@
         </ion-header>
 
         <ion-content>
-            <ion-list>
+            <ion-list class="nav-menu">
                 <ion-menu-toggle auto-hide="false" *ngFor="let nav of NAV">
-                    <ion-item routerDirection="root" [routerLink]="nav.link" [class.active-menu]="active === nav.link">
+                    <ion-item class="menu-item" routerDirection="root" [routerLink]="nav.link" [class.active-menu]="active === nav.link">
                         {{nav.name}}
-                        <ion-icon slot="start" [ios]="nav.icon + '-outline'" [md]="nav.icon + '-sharp'"></ion-icon>
+                        <ion-icon class="nav-icon" slot="start" [ios]="nav.icon + '-outline'" [md]="nav.icon + '-sharp'"></ion-icon>
                     </ion-item>
                 </ion-menu-toggle>
             </ion-list>
-            <ion-list *ngIf="rate == 0">
+            <ion-list class="nav-menu" *ngIf="rate == 0">
                 <!--NEED TO ADD USER -->
             </ion-list>
         </ion-content>

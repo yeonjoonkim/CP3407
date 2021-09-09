@@ -1,18 +1,48 @@
-h1 {
-    padding-top: 10px;
+.detail {
+    background-color: #4C516D;
+    h1 {
+        color: #7EF9FF;
+        padding-top: 10px;
+    }
+}
+
+.heading-btn {
+    font-weight: bold;
+    background: #4C516D;
+    color: #7EF9FF;
+    border: 2px #7EF9FF solid;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    padding-top: 5px;
+    width: 80px;
+    height: 40px;
+    margin: 10px;
+    font-size: 18px;
+}
+
+.heading-btn:hover {
+    background-color: grey;
 }
 
 .icon {
+    color: #7EF9FF;
     margin: 20px;
     height: 50px;
     width: 50px;
 }
 
-ion-button {
-    fill: solid;
+.menu-item {
+    --background: #4C516D;
     font-weight: bold;
-    color: white;
-    width: 80px;
-    margin: 20px;
-    font-size: 12px;
+    font-size: 17px;
+    color: #7EF9FF;
+}
+
+.nav-icon {
+    color: #7EF9FF;
+}
+
+.nav-menu {
+    background-color: #4C516D;
 }
