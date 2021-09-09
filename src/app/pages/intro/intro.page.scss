@@ -1,10 +1,15 @@
-ion-content {
-    --background: #9999;
+.box {
+    --background: #7EF9FF;
 }
 
 .swiper-container {
     height: 100%;
     width: 100%;
+}
+
+.image {
+    max-width: 500px;
+    max-height: 500px;
 }
 
 .swiper-slide {
@@ -14,8 +19,20 @@ ion-content {
     justify-content: center;
 }
 
-ion-button {
-    margin-top: 50px;
+.nxt-btn {
+    font-size: 40px;
+    font-weight: bold;
+    color: #4C516D;
     height: 100px;
     width: 150px;
+    margin-top: 10px;
+}
+
+.txt {
+    font-size: 40px;
+    color: #4C516D;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
