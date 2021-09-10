@@ -29,6 +29,10 @@ const routes: Routes = [
         loadChildren: () => import('../setting/setting.module').then(m => m.SettingPageModule)
       },
       {
+        path: 'loginlog',
+        loadChildren: () => import('../login-log/login-log.module').then(m => m.LoginLogPageModule)
+      },
+      {
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'

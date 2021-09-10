@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Login Log</ion-title>
+
+        <!-- menu -->
+        <ion-buttons slot="start">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <div class="search">
+        <ion-toolbar>
+            <ion-searchbar class="search_bar" animate='true' [(ngModel)]="query" placeholder="Search Details" showCancelButton="focus" animated="true"></ion-searchbar>
+        </ion-toolbar>
+    </div>
+
+    <ion-list>
+        <ion-item class="info_title">
+            <ion-label>
+                Date
+            </ion-label>
+            <ion-label>
+                Time
+            </ion-label>
+            <ion-label>
+                ID
+            </ion-label>
+            <ion-label>
+                OS
+            </ion-label>
+            <ion-label>
+                Access
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-header>
+
+<ion-content class="main">
+
+    <ion-infinite-scroll>
+        <ion-list *ngFor="let info of accessList | filter:query">
+            <ion-item class="user_info">
+                <ion-label>
+                    {{info.date.toDate() | date: 'dd/M/yyyy'}}
+                </ion-label>
+                <ion-label>
+                    {{info.date.toDate() | date: 'h:mm a'}}
+                </ion-label>
+                <ion-label>
+                    {{info.id}}
+                </ion-label>
+                <ion-label>
+                    {{info.deviceInfo.os}}
+                </ion-label>
+                <ion-label class="login" *ngIf="info.acessState == true">
+                    Login
+                </ion-label>
+                <ion-label class="failed" *ngIf="info.acessState == false">
+                    Failed
+                </ion-label>
+                <ion-label class="signout" *ngIf="info.acessState == 'logout'">
+                    Log out
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-infinite-scroll>
+
+</ion-content>

@@ -44,6 +44,14 @@ export class SidenavPage implements OnInit {
       link: '/nav/setting',
       icon: 'settings'
     }
+
+  ]
+  ADMIN_NAV= [
+    {
+      name: 'Login Log',
+      link: '/nav/loginlog',
+      icon: 'settings'
+    }
   ]
 
   constructor(private router: Router, private authService: AuthenticationService, private userService: UserService, private storage: Storage, private modalCtrl:ModalController) {

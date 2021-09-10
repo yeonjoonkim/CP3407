@@ -19,6 +19,8 @@ import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -30,7 +32,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
     HttpClientModule,
-    SwiperModule
+    SwiperModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -1,5 +1,15 @@
 .main {
+    --background: #332D31;
+}
+
+ion-toolbar {
     --background: #4C516D;
+    ion-menu-button {
+        color: #7EF9FF;
+    }
+    ion-title {
+        color: #7EF9FF;
+    }
 }
 
 .updated_date {

@@ -1,32 +1,30 @@
 <ion-app>
     <ion-menu contentId="main-content" side="start">
         <ion-header>
-            <ion-toolbar>
 
-                <ion-grid class="detail">
-                    <ion-row>
-                        <ion-col>
-                            <ion-icon class="icon" name="person-sharp"></ion-icon>
-                        </ion-col>
-                        <ion-col>
-                            <h1>{{userName}}</h1>
-                        </ion-col>
+            <ion-grid class="detail">
+                <ion-row>
+                    <ion-col>
+                        <ion-icon class="icon" name="person-sharp"></ion-icon>
+                    </ion-col>
+                    <ion-col>
+                        <h1>{{userName}}</h1>
+                    </ion-col>
 
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>
-                            <div class="heading-btn" (click)="logout()">
-                                Log out
-                            </div>
-                        </ion-col>
-                        <ion-col>
-                            <div class="heading-btn" (click)="update()">
-                                Update
-                            </div>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-toolbar>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div class="heading-btn" (click)="logout()">
+                            Log out
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="heading-btn" (click)="update()">
+                            Update
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </ion-header>
 
         <ion-content>
@@ -39,7 +37,12 @@
                 </ion-menu-toggle>
             </ion-list>
             <ion-list class="nav-menu" *ngIf="rate == 0">
-                <!--NEED TO ADD USER -->
+                <ion-menu-toggle auto-hide="false" *ngFor="let nav of ADMIN_NAV">
+                    <ion-item class="menu-item" routerDirection="root" [routerLink]="nav.link" [class.active-menu]="active === nav.link">
+                        {{nav.name}}
+                        <ion-icon class="nav-icon" slot="start" [ios]="nav.icon + '-outline'" [md]="nav.icon + '-sharp'"></ion-icon>
+                    </ion-item>
+                </ion-menu-toggle>
             </ion-list>
         </ion-content>
     </ion-menu>

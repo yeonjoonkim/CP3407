@@ -17,4 +17,16 @@ export class UserService {
        )})
     return info
   }
+
+  getLogInSheet(){
+    let list = []
+    this.firestore.collection('loginLog').ref.orderBy('date', 'desc').get().then(user =>{user.forEach(doc =>{
+      list.push({
+        acessState: doc.get('acessState'),
+        date: doc.get('date'),
+        deviceInfo: doc.get('deviceInfo'),
+        id: doc.get('id'),
+    })})})
+    return list
+  }
 }

@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: () => import('./sidenav/sidenav.module').then( m => m.SidenavPageModule),
     canLoad: [AuthGuard]
   },
+  {
+    path: 'login-log',
+    loadChildren: () => import('./login-log/login-log.module').then( m => m.LoginLogPageModule)
+  },
 
 ];
 
