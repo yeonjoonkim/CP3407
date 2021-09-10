@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
+import {AlertController, LoadingController} from '@ionic/angular'
 import {NewComponent} from '../device/new/new.component';
 import { DeviceService } from '../services/device.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-device',
@@ -10,10 +11,17 @@ import { DeviceService } from '../services/device.service';
   styleUrls: ['./device.page.scss'],
 })
 export class DevicePage implements OnInit {
-  private deviceInfo: any =[];
+  deviceInfo: any =[];
+  wsList: any=[];
+  buttonControl: string;
+  selectedWS = '';
+  selectedIP = '';
 
-  constructor(private modalCtrl: ModalController, private deviceService: DeviceService) {
+  constructor(private modalCtrl: ModalController, private deviceService: DeviceService, private router: Router,
+    private alertController: AlertController, private loadingController: LoadingController
+    ) {
     this.deviceInfo = this.deviceService.getDeviceInfo();
+    this.wsList = this.deviceService.getWSInfo();
   }
 
   ngOnInit() {
@@ -26,5 +34,90 @@ export class DevicePage implements OnInit {
 
     modal.present();
   }
+
+
+  async segmentChanged(){
+    const loading = await this.loadingController.create();
+    if(this.buttonControl == 'on'){
+      this.deviceService.updateAllDeviceOn(this.selectedWS);
+      await loading.dismiss();
+      const alert = await this.alertController.create({
+        header: this.selectedWS,
+        message:'Successfully Turn On'
+      });
+      await alert.present();
+
+    } else{
+      console.log(this.buttonControl)
+      console.log(this.selectedWS)
+      this.deviceService.updateAllDeviceOff(this.selectedWS);
+      await loading.dismiss();
+      const alert = await this.alertController.create({
+        header: this.selectedWS,
+        message:'Successfully Turn Off'
+      });
+      await alert.present();
+    }
+    setTimeout(() => {
+      window.location.reload();
+    }, 900);
+  }
+
+  async offDevice(){
+    const loading = await this.loadingController.create();
+    this.deviceService.updateSingleDeviceOff(this.selectedWS, this.selectedIP)
+    const alert = await this.alertController.create({
+      header: 'Successfully Turn Off',
+      message: "IP Address: " + this.selectedIP
+    });
+    await alert.present();
+    await loading.dismiss();
+    setTimeout(() => {
+      window.location.reload();
+    }, 900);
+  }
+
+  async onDevice(){
+    const loading = await this.loadingController.create();
+    this.deviceService.updateSingleDeviceOn(this.selectedWS, this.selectedIP)
+    const alert = await this.alertController.create({
+      header: 'Successfully Turn On',
+      message: "IP Address: " + this.selectedIP
+    });
+    await alert.present();
+    await loading.dismiss();
+    setTimeout(() => {
+      window.location.reload();
+    }, 900);
+  }
+
+  async deleteAll(){
+    const loading = await this.loadingController.create();
+    this.deviceService.deleteAllDevice(this.selectedWS)
+    const alert = await this.alertController.create({
+      header: 'Successfully Deleted',
+      message: "seletecedWS: " + this.selectedWS
+    });
+    await alert.present();
+    await loading.dismiss();
+    setTimeout(() => {
+      window.location.reload();
+    }, 900);
+  }
+
+  async deleteSingle(){    
+  const loading = await this.loadingController.create();
+  this.deviceService.deleteSingleDevice(this.selectedWS, this.selectedIP)
+  const alert = await this.alertController.create({
+    header: 'Successfully Deleted',
+    message: "IP: " + this.selectedIP
+  });
+  await alert.present();
+  await loading.dismiss();
+  setTimeout(() => {
+    window.location.reload();
+  }, 900);
+}
+
 
 }

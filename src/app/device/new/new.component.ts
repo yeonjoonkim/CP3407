@@ -77,6 +77,9 @@ export class NewComponent implements OnInit {
       buttons: ['OK'],
     });
     await alert.present();
+    setTimeout(() => {
+      window.location.reload();
+    }, 900);
     this.modalCtrl.dismiss();
       }
     }

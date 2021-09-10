@@ -17,7 +17,9 @@ export class DeviceService {
       let instrument = doc.get('instrument')
       let ip =  doc.get('ip')
       let status = doc.get('status')
-      deviceList.push({ws: ws, instrument: instrument, ip: ip, status: status})
+      if(ws != undefined && instrument != undefined && ip != undefined && status!= undefined){
+        deviceList.push({ws: ws, instrument: instrument, ip: ip, status: status})
+      }
         })
       )}
     )
@@ -30,15 +32,15 @@ export class DeviceService {
     let wsList = []
     this.firestore.collection('device').get().subscribe((user) => {user.forEach((doc =>{
       let ws = doc.get('ws')
+      if(ws != undefined){
       deviceList.push({ws: ws})
       if(!wsList.includes(ws)){
         wsList.push(ws)
       }
-        })
+        }})
       )
     })
 
-    
     // return WS
     return wsList;
   }
@@ -48,10 +50,49 @@ export class DeviceService {
       ws: ws,
       instrument: instrument,
       ip: ip,
-      status: 'on'
+      status: true
     })
   }
 
+
+  updateAllDeviceOn(ws: string){
+    let temp = []
+    this.firestore.collection('device').ref.where("ws", "==", ws).get().then((user) => {user.forEach((doc =>{
+      doc.ref.update({status: true})
+        })
+      )
+    })
+  }
+
+  updateAllDeviceOff(ws: string){
+    this.firestore.collection('device').ref.where("ws", "==", ws).get().then((device) => {device.forEach(doc =>
+      doc.ref.update({status: false})
+       )})
+  }
+
+  updateSingleDeviceOff(ws: string, ip: string){
+    this.firestore.collection('device').ref.where("ws", "==", ws).where("ip", "==", ip).get().then((device) => {device.forEach(doc =>
+      doc.ref.update({status: false})
+       )})
+  }
+
+  updateSingleDeviceOn(ws: string, ip: string){
+    this.firestore.collection('device').ref.where("ws", "==", ws).where("ip", "==", ip).get().then((device) => {device.forEach(doc =>
+      doc.ref.update({status: true})
+       )})
+  }
+
+  deleteAllDevice(ws: string){
+    this.firestore.collection('device').ref.where("ws", "==", ws).get().then((device) => {device.forEach(doc =>
+      doc.ref.set({deleted: "Y"})
+       )})
+  }
+
+  deleteSingleDevice(ws: string, ip: string){
+    this.firestore.collection('device').ref.where("ws", "==", ws).where("ip", "==", ip).get().then((device) => {device.forEach(doc =>
+      doc.ref.set({deleted: "Y"})
+       )})
+  }
   
 
 }

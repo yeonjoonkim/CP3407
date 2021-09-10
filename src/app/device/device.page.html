@@ -13,7 +13,73 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
+<ion-content>
+    <ion-card *ngFor="let ws of wsList">
+        <div class="deleteWS" (click)="selectedWS= ws; deleteAll();">Delete All</div>
+        <ion-card-title>
+            <h1>{{ws}}</h1>
+        </ion-card-title>
+        <ion-card-subtitle>
+            <ion-segment [(ngModel)]="buttonControl" (click)="selectedWS= ws; segmentChanged()">
+                <ion-segment-button class="on-btn" value="on">
+                    <ion-label>ON</ion-label>
+                </ion-segment-button>
+                <ion-segment-button class="off-btn" value="off">
+                    <ion-label>OFF</ion-label>
+                </ion-segment-button>
+            </ion-segment>
+        </ion-card-subtitle>
+        <ion-card-content>
+            <ion-list>
+                <ion-item class="info_title">
+                    <ion-label>
+                        Instrument
+                    </ion-label>
+                    <ion-label>
+                        IP Address
+                    </ion-label>
+                    <ion-label>
+                        Status
+                    </ion-label>
+                    <ion-label>
+                        Delete
+                    </ion-label>
+                    <ion-label>
+                        ON / OFF
+                    </ion-label>
+                </ion-item>
+            </ion-list>
 
-<ion-content class="main">
-    <!-- Content -->
+            <ion-infinite-scroll>
+                <ion-list *ngFor='let device of deviceInfo; let i = index'>
+
+                    <ion-item *ngIf="device.ws == ws">
+                        <ion-label>
+                            {{device.instrument}}
+                        </ion-label>
+                        <ion-label>
+                            {{device.ip}}
+                        </ion-label>
+                        <ion-label class="on" *ngIf="device.status == true">
+                            ON
+                        </ion-label>
+                        <ion-label class="off" *ngIf="device.status == false">
+                            OFF
+                        </ion-label>
+                        <ion-label class="delete" (click)="selectedWS= ws; selectedIP= device.ip; deleteSingle();">
+                            <u>Delete</u>
+                        </ion-label>
+                        <ion-label class="off-single" *ngIf="device.status == true" (click)="selectedWS= ws; selectedIP= device.ip; offDevice();">
+                            Turn Off
+                        </ion-label>
+                        <ion-label class="on-single" *ngIf="device.status == false" (click)="selectedWS= ws; selectedIP= device.ip; onDevice();">
+                            Turn On
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ion-infinite-scroll>
+        </ion-card-content>
+
+    </ion-card>
+
 </ion-content>

@@ -15,3 +15,87 @@ ion-toolbar {
         color: #7EF9FF;
     }
 }
+
+ion-card {
+    --background: #332D31;
+    ion-card-title {
+        padding: 10px;
+        margin: 10px;
+        font-size: 40px;
+        color: #7EF9FF;
+    }
+    ion-card-content {
+        --background: #4C516D;
+    }
+    ion-item {
+        text-align: center;
+    }
+}
+
+.info_title {
+    --background: #332D31;
+    color: orange;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.on-btn {
+    --background: #6A287E;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.off-btn {
+    --background: #7D1B7E;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.on {
+    text-align: center;
+    border-radius: 5px;
+    background-color: #571B7E;
+    color: white;
+    font-weight: bold;
+}
+
+.off {
+    text-align: center;
+    border-radius: 5px;
+    background-color: #7E587E;
+    color: white;
+    font-weight: bold;
+}
+
+.off-single {
+    text-align: center;
+    border-radius: 5px;
+    background-color: #7E587E;
+    color: white;
+    font-weight: bold;
+}
+
+.on-single {
+    text-align: center;
+    border-radius: 5px;
+    background-color: #571B7E;
+    color: white;
+    font-weight: bold;
+}
+
+.delete {
+    color: #8D38C9;
+    font-weight: bold;
+}
+
+.deleteWS {
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    font-style: bold;
+    width: 70px;
+    height: 20px;
+    background-color: #601008;
+    color: #FFFFFF;
+}
