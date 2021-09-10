@@ -1,3 +1,41 @@
-<p>
-  new works!
-</p>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title class="info_title">
+            Add New Device
+        </ion-title>
+        <ion-buttons class="btn" (click)="cancel()" slot="start">
+            Back
+        </ion-buttons>
+        <ion-buttons class="btn" (click)="add()" slot="end">
+            Add
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="main" [fullscreen]="true">
+    <ion-item>
+        <ion-label> Would you like to add new WS?</ion-label>
+        <ion-select [(ngModel)]="SELECTED">
+            <ion-select-option *ngFor="let s of SELECTION" [value]="s">{{s}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item *ngIf="SELECTED == 'NO' && deviceInfo.length > 0">
+        <ion-label> Weather Station</ion-label>
+        <ion-select [(ngModel)]="selectedWS">
+            <ion-select-option *ngFor="let device of wsList" [value]="device">{{device}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item *ngIf="SELECTED == 'YES'">
+        <ion-label> Add New Weather Station</ion-label>
+        <ion-input [(ngModel)]="selectedWS" placeholder="Please Enter New WS"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="selectedWS.length > 0">
+        <ion-label> Add New Instrument</ion-label>
+        <ion-input [(ngModel)]="newInstrument" placeholder="Please Enter New Instrument"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="selectedWS.length > 0">
+        <ion-label> IP Address</ion-label>
+        <ion-input [(ngModel)]="newIP" placeholder="Please Enter IP Address"></ion-input>
+    </ion-item>
+</ion-content>

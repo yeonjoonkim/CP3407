@@ -8,6 +8,8 @@ import { DevicePageRoutingModule } from './device-routing.module';
 
 import { DevicePage } from './device.page';
 
+import {NewComponent} from '../device/new/new.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,6 @@ import { DevicePage } from './device.page';
     IonicModule,
     DevicePageRoutingModule
   ],
-  declarations: [DevicePage]
+  declarations: [DevicePage, NewComponent]
 })
 export class DevicePageModule {}
