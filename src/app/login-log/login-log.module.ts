@@ -7,16 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { LoginLogPageRoutingModule } from './login-log-routing.module';
 
 import { LoginLogPage } from './login-log.page';
-
-import {Ng2SearchPipe} from 'ng2-search-filter'
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginLogPageRoutingModule
+    LoginLogPageRoutingModule,
+    Ng2SearchPipeModule
   ],
-  declarations: [LoginLogPage, Ng2SearchPipe]
+  declarations: [LoginLogPage]
 })
 export class LoginLogPageModule {}
