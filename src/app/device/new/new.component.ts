@@ -69,7 +69,8 @@ export class NewComponent implements OnInit {
       if (addGrant == true){
     //init loading signal
     const loading = await this.loadingController.create();
-    this.deviceService.addDevice(this.selectedWS, this.newInstrument, this.newIP)
+    this.deviceService.addDevice(this.selectedWS, this.newInstrument, this.newIP);
+    this.deviceService.systemLogNewDevice(this.selectedWS, this.newInstrument, this.newIP);
     await loading.dismiss();
     //alert the user
     const alert = await this.alertController.create({
@@ -78,9 +79,10 @@ export class NewComponent implements OnInit {
     });
     await alert.present();
     setTimeout(() => {
+      this.modalCtrl.dismiss();
       window.location.reload();
     }, 900);
-    this.modalCtrl.dismiss();
+    
       }
     }
 

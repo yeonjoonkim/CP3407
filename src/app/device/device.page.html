@@ -66,13 +66,13 @@
                         <ion-label class="off" *ngIf="device.status == false">
                             OFF
                         </ion-label>
-                        <ion-label class="delete" (click)="selectedWS= ws; selectedIP= device.ip; deleteSingle();">
+                        <ion-label class="delete" (click)="seletedDevice= device.instrument; selectedWS= ws; selectedIP= device.ip; deleteSingle();">
                             <u>Delete</u>
                         </ion-label>
-                        <ion-label class="off-single" *ngIf="device.status == true" (click)="selectedWS= ws; selectedIP= device.ip; offDevice();">
+                        <ion-label class="off-single" *ngIf="device.status == true" (click)="seletedDevice= device.instrument; selectedWS= ws; selectedIP= device.ip; offDevice();">
                             Turn Off
                         </ion-label>
-                        <ion-label class="on-single" *ngIf="device.status == false" (click)="selectedWS= ws; selectedIP= device.ip; onDevice();">
+                        <ion-label class="on-single" *ngIf="device.status == false" (click)="seletedDevice= device.instrument; selectedWS= ws; selectedIP= device.ip; onDevice();">
                             Turn On
                         </ion-label>
                     </ion-item>

@@ -16,6 +16,7 @@ export class DevicePage implements OnInit {
   buttonControl: string;
   selectedWS = '';
   selectedIP = '';
+  seletedDevice = '';
 
   constructor(private modalCtrl: ModalController, private deviceService: DeviceService, private router: Router,
     private alertController: AlertController, private loadingController: LoadingController
@@ -40,6 +41,7 @@ export class DevicePage implements OnInit {
     const loading = await this.loadingController.create();
     if(this.buttonControl == 'on'){
       this.deviceService.updateAllDeviceOn(this.selectedWS);
+      this.deviceService.systemLogAllDeviceManualUpdate(this.buttonControl, this.selectedWS);
       await loading.dismiss();
       const alert = await this.alertController.create({
         header: this.selectedWS,
@@ -51,6 +53,7 @@ export class DevicePage implements OnInit {
       console.log(this.buttonControl)
       console.log(this.selectedWS)
       this.deviceService.updateAllDeviceOff(this.selectedWS);
+      this.deviceService.systemLogAllDeviceManualUpdate(this.buttonControl, this.selectedWS);
       await loading.dismiss();
       const alert = await this.alertController.create({
         header: this.selectedWS,
@@ -66,6 +69,7 @@ export class DevicePage implements OnInit {
   async offDevice(){
     const loading = await this.loadingController.create();
     this.deviceService.updateSingleDeviceOff(this.selectedWS, this.selectedIP)
+    this.deviceService.systemLogSingleDeviceManualOff(this.selectedWS, this.seletedDevice)
     const alert = await this.alertController.create({
       header: 'Successfully Turn Off',
       message: "IP Address: " + this.selectedIP
@@ -80,6 +84,7 @@ export class DevicePage implements OnInit {
   async onDevice(){
     const loading = await this.loadingController.create();
     this.deviceService.updateSingleDeviceOn(this.selectedWS, this.selectedIP)
+    this.deviceService.systemLogSingleDeviceManualOn(this.selectedWS, this.seletedDevice)
     const alert = await this.alertController.create({
       header: 'Successfully Turn On',
       message: "IP Address: " + this.selectedIP
@@ -94,6 +99,7 @@ export class DevicePage implements OnInit {
   async deleteAll(){
     const loading = await this.loadingController.create();
     this.deviceService.deleteAllDevice(this.selectedWS)
+    this.deviceService.systemLogAllDeviceManualDelete(this.selectedWS)
     const alert = await this.alertController.create({
       header: 'Successfully Deleted',
       message: "seletecedWS: " + this.selectedWS
@@ -108,6 +114,7 @@ export class DevicePage implements OnInit {
   async deleteSingle(){    
   const loading = await this.loadingController.create();
   this.deviceService.deleteSingleDevice(this.selectedWS, this.selectedIP)
+  this.deviceService.systemLogSingleDeviceManualDelete(this.selectedWS, this.seletedDevice)
   const alert = await this.alertController.create({
     header: 'Successfully Deleted',
     message: "IP: " + this.selectedIP
