@@ -28,6 +28,9 @@
                 OS
             </ion-label>
             <ion-label>
+                IP Address
+            </ion-label>
+            <ion-label>
                 Access
             </ion-label>
         </ion-item>
@@ -40,7 +43,7 @@
         <ion-list *ngFor="let info of accessList | filter:query">
             <ion-item class="user_info">
                 <ion-label>
-                    {{info.date.toDate() | date: 'dd/M/yyyy'}}
+                    {{info.date.toDate() | date: 'dd/MM/yy'}}
                 </ion-label>
                 <ion-label>
                     {{info.date.toDate() | date: 'h:mm a'}}
@@ -50,6 +53,9 @@
                 </ion-label>
                 <ion-label>
                     {{info.deviceInfo.os}}
+                </ion-label>
+                <ion-label>
+                    {{info.ip}}
                 </ion-label>
                 <ion-label class="login" *ngIf="info.acessState == true">
                     Login

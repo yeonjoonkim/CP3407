@@ -26,6 +26,7 @@ export class UserService {
         date: doc.get('date'),
         deviceInfo: doc.get('deviceInfo'),
         id: doc.get('id'),
+        ip: doc.get('ip')
     })})})
     return list
   }

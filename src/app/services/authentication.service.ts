@@ -3,7 +3,7 @@ import { BehaviorSubject} from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DeviceDetectorService } from "ngx-device-detector";
-
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,14 @@ import { DeviceDetectorService } from "ngx-device-detector";
 export class AuthenticationService {
   //check is Authenticated
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+  private url = "http://api.ipify.org/?format=json";
+  private ipAddress:string; 
   private deviceInfo = null;
   private timestamp: Date = new Date();
-  constructor(private storage: Storage, private firestore: AngularFirestore, private device: DeviceDetectorService) {
+  constructor(private storage: Storage, private firestore: AngularFirestore, private device: DeviceDetectorService, private http: HttpClient) {
     this.loadToken();
     this.checkDevice();
+    this.getIP();
   }
 
   async loadToken(){
@@ -32,6 +35,15 @@ export class AuthenticationService {
       }
       
     )
+  }
+
+  getIP(){
+    this.getIPAddress().subscribe((res:any)=>{
+      this.ipAddress = res.ip;
+    });
+  }
+  getIPAddress(){
+    return this.http.get(this.url)
   }
   userList(){
     //Get userProfile from firestore
@@ -67,7 +79,8 @@ export class AuthenticationService {
             id: inputId,
             password: inputPwd,
             deviceInfo: this.deviceInfo,
-            date: this.timestamp
+            date: this.timestamp,
+            ip: this.ipAddress
           })
         }
       }
@@ -78,7 +91,8 @@ export class AuthenticationService {
         id: inputId,
         password: inputPwd,
         deviceInfo: this.deviceInfo,
-        date: this.timestamp
+        date: this.timestamp,
+        ip: this.ipAddress
       })
     }
     return accessGrant
@@ -92,7 +106,8 @@ export class AuthenticationService {
         acessState: 'logout',
         id: val,
         deviceInfo: this.deviceInfo,
-        date: this.timestamp
+        date: this.timestamp,
+        ip: this.ipAddress
       })
       )
     this.storage.remove("TOKEN_KEY");
