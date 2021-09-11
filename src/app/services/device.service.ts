@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { element } from 'protractor';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,7 @@ export class DeviceService {
   getDeviceInfo(){
     //Get device from firestore
     let deviceList = []
-    this.firestore.collection('device').get().subscribe((user) => {user.forEach((doc =>{
+    this.firestore.collection('device').ref.orderBy('ws', 'asc').get().then((user) => {user.forEach((doc =>{
       let ws = doc.get('ws')
       let instrument = doc.get('instrument')
       let ip =  doc.get('ip')
@@ -57,7 +58,6 @@ export class DeviceService {
 
 
   updateAllDeviceOn(ws: string){
-    let temp = []
     this.firestore.collection('device').ref.where("ws", "==", ws).get().then((user) => {user.forEach((doc =>{
       doc.ref.update({status: true})
         })
@@ -77,22 +77,25 @@ export class DeviceService {
        )})
   }
 
+
   updateSingleDeviceOn(ws: string, ip: string){
     this.firestore.collection('device').ref.where("ws", "==", ws).where("ip", "==", ip).get().then((device) => {device.forEach(doc =>
       doc.ref.update({status: true})
        )})
   }
 
-  deleteAllDevice(ws: string){
-    this.firestore.collection('device').ref.where("ws", "==", ws).get().then((device) => {device.forEach(doc =>
-      doc.ref.set({deleted: "Y"})
-       )})
+  async deleteAllDevice(ws: string){
+    const doc = await this.firestore.collection('device').ref.where("ws", "==", ws).get();
+    doc.forEach(element => {
+      element.ref.delete();
+    });
   }
 
-  deleteSingleDevice(ws: string, ip: string){
-    this.firestore.collection('device').ref.where("ws", "==", ws).where("ip", "==", ip).get().then((device) => {device.forEach(doc =>
-      doc.ref.set({deleted: "Y"})
-       )})
+  async deleteSingleDevice(ws: string, ip: string){
+    const doc = await this.firestore.collection('device').ref.where("ws", "==", ws).where("ip", "==", ip).get();
+    doc.forEach(element => {
+      element.ref.delete();
+    });
   }
 
   systemLogAllDeviceManualUpdate(status: string, ws: string){
@@ -114,6 +117,30 @@ export class DeviceService {
       })
     }
   }
+
+  systemLogAllDeviceAutoUpdate(status: string, ws: string){
+    if(status == 'on'){
+      this.updateAllDeviceOn(ws)
+      this.firestore.collection('systemLog').ref.add({
+        date: this.timestamp,
+        ws: ws,
+        instrument: 'All',
+        action: 'Turn On',
+        comment:'Auto'
+      })
+    } else if(status == 'off'){
+      this.updateAllDeviceOff(ws)
+      this.firestore.collection('systemLog').ref.add({
+        date: this.timestamp,
+        ws: ws,
+        instrument: 'All',
+        action: 'Turn Off',
+        comment:'Auto'
+      })
+    }
+  }
+
+
   systemLogSingleDeviceManualOn(ws: string, instrument: string){
     this.firestore.collection('systemLog').ref.add({
       date: this.timestamp,
