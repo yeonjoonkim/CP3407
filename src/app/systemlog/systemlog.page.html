@@ -2,14 +2,67 @@
     <ion-toolbar>
         <ion-title>System Log</ion-title>
 
-        <!-- Hamburger -->
+        <!-- menu -->
         <ion-buttons slot="start">
             <ion-menu-button autoHide="false"></ion-menu-button>
         </ion-buttons>
-
     </ion-toolbar>
+    <div class="search">
+        <ion-toolbar>
+            <ion-searchbar class="search_bar" animate='true' [(ngModel)]="query" placeholder="Search Details" showCancelButton="focus" animated="true"></ion-searchbar>
+        </ion-toolbar>
+    </div>
+
+    <ion-list>
+        <ion-item class="info_title">
+            <ion-label>
+                Date
+            </ion-label>
+            <ion-label>
+                Time
+            </ion-label>
+            <ion-label>
+                Weather Station
+            </ion-label>
+            <ion-label>
+                Instrument
+            </ion-label>
+            <ion-label>
+                Action
+            </ion-label>
+            <ion-label>
+                Comment
+            </ion-label>
+        </ion-item>
+    </ion-list>
 </ion-header>
 
-<ion-content>
-    <!-- Content -->
+<ion-content class="main">
+
+    <ion-infinite-scroll>
+        <ion-list *ngFor="let info of SystemLog | filter:query" (click)="check()">
+
+            <ion-item class="user_info">
+                <ion-label>
+                    {{info.date.toDate() | date: 'dd/MM/yy'}}
+                </ion-label>
+                <ion-label>
+                    {{info.date.toDate() | date: 'h:mm a'}}
+                </ion-label>
+                <ion-label>
+                    {{info.ws}}
+                </ion-label>
+                <ion-label>
+                    {{info.instrument}}
+                </ion-label>
+                <ion-label>
+                    {{info.action}}
+                </ion-label>
+                <ion-label>
+                    {{info.comment}}
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-infinite-scroll>
+
 </ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DeviceService } from '../services/device.service';
 
 @Component({
   selector: 'app-systemlog',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./systemlog.page.scss'],
 })
 export class SystemlogPage implements OnInit {
-
-  constructor() { }
+  private SystemLog: any = []
+  query = ''
+  constructor(private deviceService: DeviceService) {
+    this.SystemLog = this.deviceService.getSystemLog();
+  }
 
   ngOnInit() {
+  }
+
+  check(){
+    console.log(this.SystemLog)
   }
 
 }

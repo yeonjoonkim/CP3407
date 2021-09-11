@@ -8,12 +8,15 @@ import { SystemlogPageRoutingModule } from './systemlog-routing.module';
 
 import { SystemlogPage } from './systemlog.page';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SystemlogPageRoutingModule
+    SystemlogPageRoutingModule,
+    Ng2SearchPipeModule
   ],
   declarations: [SystemlogPage]
 })

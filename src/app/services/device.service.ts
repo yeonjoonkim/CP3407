@@ -158,10 +158,28 @@ export class DeviceService {
       ws: ws,
       instrument: instrument,
       action: 'Add',
-      comment:'IP: ' + newIP
+      comment: 'Manual'
     })
   }
 
+
+  getSystemLog(){
+    //Get device from firestore
+    let systemLogs = []
+    this.firestore.collection('systemLog').ref.orderBy('date', 'desc').get().then((user) => {user.forEach((doc =>{
+      systemLogs.push({
+        date: doc.get('date'),
+        ws: doc.get('ws'),
+        action: doc.get('action'),
+        instrument: doc.get('instrument'),
+        comment: doc.get('comment')
+      })
+        })
+      )}
+    )
+    // return device
+    return systemLogs;
+  }
   
   
 

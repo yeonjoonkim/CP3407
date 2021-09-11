@@ -9,7 +9,7 @@ import {UserService} from '../services/user.service'
 })
 export class LoginLogPage implements OnInit {
   private accessList: any = []
-  queary = ''
+  query = ''
   constructor(private data: UserService) {
     this.accessList = this.data.getLogInSheet();
   }
