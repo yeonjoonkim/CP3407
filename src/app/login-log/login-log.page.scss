@@ -12,6 +12,10 @@ ion-toolbar {
     }
 }
 
+ion-content {
+    --background: #000000;
+}
+
 .login {
     text-align: center;
     border-radius: 5px;
@@ -43,10 +47,18 @@ ion-toolbar {
     font-size: 20px;
 }
 
+.info_title::after {
+    --background: #332D31;
+}
+
 .user_info {
     --background: #332D31;
     color: #7EF9FF;
     border-width: thin;
     text-align: center;
     font-size: 15px;
+}
+
+.user_info::after {
+    --background: #332D31;
 }
