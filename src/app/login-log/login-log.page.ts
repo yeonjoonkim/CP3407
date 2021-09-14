@@ -8,9 +8,10 @@ import {UserService} from '../services/user.service'
   styleUrls: ['./login-log.page.scss'],
 })
 export class LoginLogPage implements OnInit {
-  private accessList: any = []
+  accessList: any = []
   query = ''
   constructor(private data: UserService) {
+    //get list from firestore
     this.accessList = this.data.getLogInSheet();
   }
 

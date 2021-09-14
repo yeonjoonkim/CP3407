@@ -9,7 +9,9 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class SettingPage implements OnInit {
   intervals: any[] = [{ id:1, name: "1 Hour"},{id:2,name: "2 Hours"},{id:3,name: "3 Hours"},{id:4,name: "3 Hours"}];
-  interval = 1;
+  interval: number;
+  max_temp: number;
+  max_wind: number;
   selelectedIntervals: number;
 
 
@@ -21,9 +23,15 @@ export class SettingPage implements OnInit {
     await this.storage.create();
     // get the selection of the interval from storage
     await this.storage.get("interval").then(val =>{
+      // set the storage interval for selection
       this.interval = val;
     })
-    // set the storage interval for selection
+    await this.storage.get("max_temp").then(val =>{
+      // set the storage max_temp for selection
+      this.max_temp = val;
+    })
+
+    
     
   }
 

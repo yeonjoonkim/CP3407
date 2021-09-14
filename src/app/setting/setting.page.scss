@@ -1,3 +1,19 @@
-ion-content {
-    --background-color: #000000;
+.main {
+    --background: #332D31;
+}
+
+ion-toolbar {
+    --background: #4C516D;
+    ion-menu-button {
+        color: #7EF9FF;
+    }
+    ion-title {
+        color: #7EF9FF;
+    }
+}
+
+ion-item {
+    --background: #332D31;
+    color: #7EF9FF;
+    font-style: bold;
 }

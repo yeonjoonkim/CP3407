@@ -40,7 +40,7 @@
 <ion-content class="main">
 
     <ion-infinite-scroll>
-        <ion-list *ngFor="let info of SystemLog | filter:query" (click)="check()">
+        <ion-list *ngFor="let info of SystemLog | filter:query">
 
             <ion-item class="user_info">
                 <ion-label>

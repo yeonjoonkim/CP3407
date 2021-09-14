@@ -1,7 +1,3 @@
-.main {
-    --background: #332D31;
-}
-
 ion-toolbar {
     --background: #4C516D;
     ion-menu-button {
@@ -10,6 +6,10 @@ ion-toolbar {
     ion-title {
         color: #7EF9FF;
     }
+}
+
+ion-content {
+    --background: #000000;
 }
 
 .login {

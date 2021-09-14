@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import {AlertController, LoadingController} from '@ionic/angular'
 import {NewComponent} from '../device/new/new.component';
 import { DeviceService } from '../services/device.service';
+import { SyslogService } from '../services/syslog.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,8 +20,10 @@ export class DevicePage implements OnInit {
   seletedDevice = '';
 
   constructor(private modalCtrl: ModalController, private deviceService: DeviceService, private router: Router,
-    private alertController: AlertController, private loadingController: LoadingController
+    private alertController: AlertController, private loadingController: LoadingController, private syslogService: SyslogService
     ) {
+
+      //bring the info from firestore
     this.deviceInfo = this.deviceService.getDeviceInfo();
     this.wsList = this.deviceService.getWSInfo();
   }
@@ -41,7 +44,7 @@ export class DevicePage implements OnInit {
     const loading = await this.loadingController.create();
     if(this.buttonControl == 'on'){
       this.deviceService.updateAllDeviceOn(this.selectedWS);
-      this.deviceService.systemLogAllDeviceManualUpdate(this.buttonControl, this.selectedWS);
+      this.syslogService.systemLogAllDeviceManualUpdate(this.buttonControl, this.selectedWS);
       await loading.dismiss();
       const alert = await this.alertController.create({
         header: this.selectedWS,
@@ -50,10 +53,10 @@ export class DevicePage implements OnInit {
       await alert.present();
 
     } else{
-      console.log(this.buttonControl)
-      console.log(this.selectedWS)
+      //console.log(this.buttonControl)
+      //console.log(this.selectedWS)
       this.deviceService.updateAllDeviceOff(this.selectedWS);
-      this.deviceService.systemLogAllDeviceManualUpdate(this.buttonControl, this.selectedWS);
+      this.syslogService.systemLogAllDeviceManualUpdate(this.buttonControl, this.selectedWS);
       await loading.dismiss();
       const alert = await this.alertController.create({
         header: this.selectedWS,
@@ -69,7 +72,7 @@ export class DevicePage implements OnInit {
   async offDevice(){
     const loading = await this.loadingController.create();
     this.deviceService.updateSingleDeviceOff(this.selectedWS, this.selectedIP)
-    this.deviceService.systemLogSingleDeviceManualOff(this.selectedWS, this.seletedDevice)
+    this.syslogService.systemLogSingleDeviceManualOff(this.selectedWS, this.seletedDevice)
     const alert = await this.alertController.create({
       header: 'Successfully Turn Off',
       message: "IP Address: " + this.selectedIP
@@ -84,7 +87,7 @@ export class DevicePage implements OnInit {
   async onDevice(){
     const loading = await this.loadingController.create();
     this.deviceService.updateSingleDeviceOn(this.selectedWS, this.selectedIP)
-    this.deviceService.systemLogSingleDeviceManualOn(this.selectedWS, this.seletedDevice)
+    this.syslogService.systemLogSingleDeviceManualOn(this.selectedWS, this.seletedDevice)
     const alert = await this.alertController.create({
       header: 'Successfully Turn On',
       message: "IP Address: " + this.selectedIP
@@ -99,7 +102,7 @@ export class DevicePage implements OnInit {
   async deleteAll(){
     const loading = await this.loadingController.create();
     this.deviceService.deleteAllDevice(this.selectedWS)
-    this.deviceService.systemLogAllDeviceManualDelete(this.selectedWS)
+    this.syslogService.systemLogAllDeviceManualDelete(this.selectedWS)
     const alert = await this.alertController.create({
       header: 'Successfully Deleted',
       message: "seletecedWS: " + this.selectedWS
@@ -114,7 +117,7 @@ export class DevicePage implements OnInit {
   async deleteSingle(){    
   const loading = await this.loadingController.create();
   this.deviceService.deleteSingleDevice(this.selectedWS, this.selectedIP)
-  this.deviceService.systemLogSingleDeviceManualDelete(this.selectedWS, this.seletedDevice)
+  this.syslogService.systemLogSingleDeviceManualDelete(this.selectedWS, this.seletedDevice)
   const alert = await this.alertController.create({
     header: 'Successfully Deleted',
     message: "IP: " + this.selectedIP

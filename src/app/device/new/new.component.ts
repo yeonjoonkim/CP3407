@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService } from 'src/app/services/device.service';
 import { ModalController } from '@ionic/angular';
-import {AlertController, LoadingController} from '@ionic/angular'
+import {AlertController, LoadingController} from '@ionic/angular';
+import {SyslogService} from 'src/app/services/syslog.service';
 
 
 
@@ -18,7 +19,9 @@ export class NewComponent implements OnInit {
   SELECTED = 'NO';
   newInstrument = '';
   newIP = '';
-  constructor(private deviceService: DeviceService, private modalCtrl: ModalController, private alertController: AlertController, private loadingController: LoadingController) {
+  constructor(private deviceService: DeviceService, private modalCtrl: ModalController, private alertController: AlertController, 
+    private loadingController: LoadingController, private syslogService: SyslogService) {
+      //get device info and wsList from the firstore
     this.deviceInfo = this.deviceService.getDeviceInfo();
     this.wsList = this.deviceService.getWSInfo();
   }
@@ -27,27 +30,36 @@ export class NewComponent implements OnInit {
   }
 
   cancel() {
+    //close the component
     this.modalCtrl.dismiss();
   }
 
   async add(){
+    //if Input Weather Station is null or undefined
     if (this.selectedWS === '' || this.selectedWS === undefined){
       alert("Please Enter The Weather Station")
+    } else{
+      //change to all upper case
+      this.selectedWS = this.selectedWS.toUpperCase();
     }
+    //if the instrument is null or undefined
     if (this.newInstrument === ''|| this.newInstrument === undefined){
       alert("Please Enter The New Instrument")
     }
+    //if the new IP is null or undefined
     if (this.newIP === '' || this.newIP === undefined){
       alert("Please Enter The IP Address")
     }
+    //if choice is yes and weather station is exised in the list.
     if(this.SELECTED === "YES"){
       for(let i = 0; i < this.deviceInfo.length; i++){
-        if(this.deviceInfo[i].ws === this.selectedWS){
+        if(this.deviceInfo[i].ws === this.selectedWS.toUpperCase()){
           alert("The Weather Station is existed.")
           this.selectedWS = ''
         }
       }
     }
+    //check if the ip is valid in the weather station and instrument.
     if(this.selectedWS.length > 0 && this.newInstrument.length > 0 && this.newIP.length > 0 ){
       this.ipValidation(this.newIP)
       let addGrant = true;
@@ -58,19 +70,22 @@ export class NewComponent implements OnInit {
         if(this.selectedWS === ws && this.newIP === existedIP){
           alert("New IP is existed.")
           this.newIP = ''
+          // temp_addGrant is false
           addGrant = false;
         }
         if(this.selectedWS === ws && this.newInstrument === existedInstrument){
           alert("New Instrument is existed.")
           this.newInstrument = ''
+          // temp_addGrant is false
           addGrant = false;
         }
       }
+      // check the addgrant is true then add to the list.
       if (addGrant == true){
     //init loading signal
     const loading = await this.loadingController.create();
-    this.deviceService.addDevice(this.selectedWS, this.newInstrument, this.newIP);
-    this.deviceService.systemLogNewDevice(this.selectedWS, this.newInstrument, this.newIP);
+    this.deviceService.addDevice(this.selectedWS.toUpperCase(), this.newInstrument, this.newIP);
+    this.syslogService.systemLogNewDevice(this.selectedWS.toUpperCase(), this.newInstrument, this.newIP);
     await loading.dismiss();
     //alert the user
     const alert = await this.alertController.create({

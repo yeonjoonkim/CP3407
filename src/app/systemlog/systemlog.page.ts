@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DeviceService } from '../services/device.service';
+import { SyslogService } from '../services/syslog.service';
+
 
 @Component({
   selector: 'app-systemlog',
@@ -9,15 +10,12 @@ import { DeviceService } from '../services/device.service';
 export class SystemlogPage implements OnInit {
   private SystemLog: any = []
   query = ''
-  constructor(private deviceService: DeviceService) {
-    this.SystemLog = this.deviceService.getSystemLog();
+  constructor(private systemLog: SyslogService ) {
+    //get system log from firestore
+    this.SystemLog = this.systemLog.getSystemLog();
   }
 
   ngOnInit() {
-  }
-
-  check(){
-    console.log(this.SystemLog)
   }
 
 }

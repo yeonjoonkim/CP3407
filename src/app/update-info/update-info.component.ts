@@ -28,6 +28,7 @@ export class UpdateInfoComponent implements OnInit {
   }
 
   updateInfo(){
+    //check the password
     for (let i = 0; i < this.userInfo.length; i++){
     if(this.currentPassword == undefined || this.confirmNewPassword1 == undefined || this.confirmNewPassword2 === undefined){
       console.log(this.currentPassword)
