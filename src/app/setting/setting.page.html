@@ -13,10 +13,28 @@
 <ion-content class="main">
     <ion-list>
         <ion-item>
-            <ion-label>Session Refresh Interval</ion-label>
-            <ion-select [(ngModel)]="interval" (ionChange)="setInterval()">
+            <ion-label position="stacked">Session Refresh Interval <span style="color: #fe7b51">*</span></ion-label>
+            <ion-select [(ngModel)]="interval">
                 <ion-select-option *ngFor='let i of intervals' [value]='i.id'> {{i.name}}</ion-select-option>
             </ion-select>
         </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Maximum Temperature<span style="color: #fe7b51">*</span></ion-label>
+            <ion-input type="number" [(ngModel)]="max_temp"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Maximum Wind Speed<span style="color: #fe7b51">*</span></ion-label>
+            <ion-input type="number" [(ngModel)]="max_wind"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">City<span style="color: #fe7b51">*</span></ion-label>
+            <ion-input type="string" [(ngModel)]="city"></ion-input>
+        </ion-item>
     </ion-list>
+
+    <div class="save-setting-box">
+        <ion-button class="save-btn" (click)="setSetting()" fill="outline">
+            Save
+        </ion-button>
+    </div>
 </ion-content>

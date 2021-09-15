@@ -55,10 +55,22 @@
                 <ion-label>
                     {{info.instrument}}
                 </ion-label>
-                <ion-label>
-                    {{info.action}}
+                <ion-label class="turn-off" *ngIf="info.action == 'Turn Off'">
+                    Off
                 </ion-label>
-                <ion-label>
+                <ion-label class="turn-on" *ngIf="info.action == 'Turn On'">
+                    On
+                </ion-label>
+                <ion-label class="delete" *ngIf="info.action == 'Delete'">
+                    Delete
+                </ion-label>
+                <ion-label class="add" *ngIf="info.action == 'Add'">
+                    Add
+                </ion-label>
+                <ion-label class="manual" *ngIf="info.comment =='Manual'">
+                    {{info.comment}}
+                </ion-label>
+                <ion-label class="auto" *ngIf="info.comment =='Auto'">
                     {{info.comment}}
                 </ion-label>
             </ion-item>

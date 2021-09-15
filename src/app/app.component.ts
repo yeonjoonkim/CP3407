@@ -17,23 +17,30 @@ export class AppComponent {
       //create a storage
       await this.storage.create();
       //check if the interval is already set up
-      this.storage.get("interval").then(val =>{
+      this.storage.get("INTERVAL").then(val =>{
         if (val === null || val === undefined){
-          this.storage.set("interval", 1)
+          this.storage.set("INTERVAL", 1)
         }
       });
       
       //check if the maxium temp is already set up
-      this.storage.get("max_temp").then(val =>{
+      this.storage.get("MAX_TEMP").then(val =>{
         if (val === null || val === undefined){
-          this.storage.set("max_temp", 39.5)
+          this.storage.set("MAX_TEMP", 39.5)
         }
       });
 
       //check if the maxium wind is already set up
-      this.storage.get("max_wind").then(val =>{
+      this.storage.get("MAX_WIND").then(val =>{
         if (val === null || val === undefined){
-          this.storage.set("max_wind", 10)
+          this.storage.set("MAX_WIND", 10)
+        }
+      });
+
+      //check if the city is already set up
+      this.storage.get("CITY").then(val =>{
+        if (val === null || val === undefined){
+          this.storage.set("CITY", "cairns")
         }
       });
     }
