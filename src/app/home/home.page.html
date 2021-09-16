@@ -11,5 +11,11 @@
 </ion-header>
 
 <ion-content class="main">
+    {{openWeatherData.lastUpdate}}
 
+    <ion-segment [(ngModel)]="selectedChoice" (click)="setChoice(); ">
+        <ion-segment-button *ngFor="let c of choice;" [value]="c">
+            {{c}}
+        </ion-segment-button>
+    </ion-segment>
 </ion-content>

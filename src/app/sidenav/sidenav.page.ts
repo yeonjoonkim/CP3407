@@ -5,6 +5,7 @@ import {AuthenticationService} from "../services/authentication.service"
 import {UserService} from "../services/user.service"
 import { Storage } from '@ionic/storage';
 import { UpdateInfoComponent } from '../update-info/update-info.component';
+import { OpenWeatherService } from '../services/open-weather.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -13,7 +14,8 @@ import { UpdateInfoComponent } from '../update-info/update-info.component';
 })
 
 export class SidenavPage implements OnInit {
-  private rate: number;
+  private city: string;
+  rate: number;
   userName: string;
   active = '';
   NAV = [
@@ -54,19 +56,23 @@ export class SidenavPage implements OnInit {
     }
   ]
 
-  constructor(private router: Router, private authService: AuthenticationService, private userService: UserService, private storage: Storage, private modalCtrl:ModalController) {
+  constructor(private router: Router, private authService: AuthenticationService, private userService: UserService, private storage: Storage, private modalCtrl:ModalController
+    , private openWeather: OpenWeatherService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.active = event.url
     })
   }
 
   async ngOnInit() {
-    this.storage.create();
+    await this.storage.create();
     this.storage.get("ID").then(val => {
       this.userName = val
     })
     this.storage.get("RATE").then(val => {
       this.rate = val
+    })
+    this.storage.get("CITY").then(val => {
+      this.openWeather.getWeatherData(val)
     })
   }
 

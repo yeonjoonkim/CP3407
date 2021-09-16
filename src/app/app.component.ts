@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 import { Storage } from '@ionic/storage';
+import { OpenWeatherService } from './services/open-weather.service';
+
 
 
 @Component({
@@ -9,41 +11,57 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  private setInt: number;
+
   items: Observable<any[]>;
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, private openWeather: OpenWeatherService) {
   }
 
     async ngOnInit() {
       //create a storage
       await this.storage.create();
-      //check if the interval is already set up
-      this.storage.get("INTERVAL").then(val =>{
+      //check if the setting has setted up
+      this.storage.get("SETTING").then(val =>{
         if (val === null || val === undefined){
-          this.storage.set("INTERVAL", 1)
+          this.storage.set("SETTING", {interval: 1, max_temp: 39.5, max_wind: 10, city: 'cairns'})
         }
       });
-      
-      //check if the maxium temp is already set up
-      this.storage.get("MAX_TEMP").then(val =>{
+      this.storage.get("CHECK").then(val =>{
         if (val === null || val === undefined){
-          this.storage.set("MAX_TEMP", 39.5)
+          this.storage.set("CHECK", "start")
         }
       });
-
-      //check if the maxium wind is already set up
-      this.storage.get("MAX_WIND").then(val =>{
-        if (val === null || val === undefined){
-          this.storage.set("MAX_WIND", 10)
-        }
-      });
-
-      //check if the city is already set up
-      this.storage.get("CITY").then(val =>{
-        if (val === null || val === undefined){
-          this.storage.set("CITY", "cairns")
-        }
-      });
+      this.checkWeather()
     }
+
+    //TODO
+    checkWeather(){
+      this.storage.get("SETTING").then(setting =>{
+      //test interval per second
+      var obs = interval(3000 * setting.interval);
+      obs.subscribe(()=> {
+        this.storage.get("TOKEN_KEY").then(token =>{
+          if(token == 'true'){
+            this.storage.get("CHECK").then(check =>{
+              if(check == 'start'){
+                //this.openWeather.getWeatherData(setting.city)
+                this.storage.get("OPENWEATHER").then(data =>{
+                 if(data.currentTemp > setting.max_temp || data.currentWindSpeed > setting.max_wind){
+
+                 }
+                })
+              } else if(check == 'stop'){
+                console.log(check)
+              }
+            })
+          }
+        });
+      })
+
+    });
+    }
+
 
     
 

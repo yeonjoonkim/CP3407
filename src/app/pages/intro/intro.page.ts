@@ -45,6 +45,6 @@ export class IntroPage implements AfterContentChecked {
   }
 
   ngOnDestroy(){
-    console.log("sss")
+    //console.log("sss")
   }
 }
