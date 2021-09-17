@@ -9,10 +9,12 @@ import {AlertController, LoadingController} from '@ionic/angular';
   styleUrls: ['./setting.page.scss'],
 })
 export class SettingPage implements OnInit {
-  intervals: any[] = [{ id:1, name: "1 Hour"},{id:2,name: "2 Hours"},{id:3,name: "3 Hours"},{id:4,name: "3 Hours"}];
+  intervals: any[] = [{ id:15, name: "15 Minitues"},{id:30,name: "30 Minitues"},{id:60,name: "1 Hour"},{id:120,name: "2 Hours"}];
   interval: number;
   max_temp: number;
   max_wind: number;
+  max_humidity: number;
+  max_rain: number;
   city: String;
   selelectedIntervals: number;
 
@@ -30,6 +32,8 @@ export class SettingPage implements OnInit {
       this.interval = val.interval;
       this.max_temp = val.max_temp;
       this.max_wind = val.max_wind;
+      this.max_humidity =val.max_humidity;
+      this.max_rain = val.max_rain;
       this.city = val.city;
     })
   }
@@ -53,11 +57,24 @@ export class SettingPage implements OnInit {
       //alert user
       settingGrant = false;
       alert("Please Enter The Maximum Temperature.")
+    } else if(this.max_humidity == null || this.max_humidity == undefined){
+      //alert user
+      settingGrant = false;
+      alert("Please Enter The Maximum Humidity.")
+    } else if(this.max_rain == null || this.max_rain == undefined){
+      //alert user
+      settingGrant = false;
+      alert("Please Enter The Maximum Rain Fall.")
     }
     await loading.dismiss();
     if(settingGrant == true){
       await this.storage.set("SETTING", 
-      {interval: this.interval, max_temp: this.max_temp, max_wind: this.max_wind, city: this.city.toLowerCase()})
+      {interval: this.interval, 
+        max_temp: this.max_temp,
+         max_wind: this.max_wind, 
+         city: this.city.toLowerCase(), 
+         max_rain: this.max_rain, 
+         max_humidity: this.max_humidity})
       alert("Setting saved.")
       setTimeout(() => {
         window.location.reload();

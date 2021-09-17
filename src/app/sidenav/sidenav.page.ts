@@ -71,9 +71,6 @@ export class SidenavPage implements OnInit {
     this.storage.get("RATE").then(val => {
       this.rate = val
     })
-    this.storage.get("CITY").then(val => {
-      this.openWeather.getWeatherData(val)
-    })
   }
 
   async logout(){

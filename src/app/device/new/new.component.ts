@@ -13,10 +13,13 @@ import {SyslogService} from 'src/app/services/syslog.service';
 })
 export class NewComponent implements OnInit {
   private deviceInfo: Array<any> =[];
-  wsList = []
-  selectedWS = '';
   SELECTION = ['YES', 'NO'];
   SELECTED = 'NO';
+  MANAGEDBY = ['openWeather'];
+  selectedManaged = 'openWeather';
+  wsList = []
+  selectedWS = '';
+
   newInstrument = '';
   newIP = '';
   constructor(private deviceService: DeviceService, private modalCtrl: ModalController, private alertController: AlertController, 
@@ -38,16 +41,13 @@ export class NewComponent implements OnInit {
     //if Input Weather Station is null or undefined
     if (this.selectedWS === '' || this.selectedWS === undefined){
       alert("Please Enter The Weather Station")
-    } else{
-      //change to all upper case
-      this.selectedWS = this.selectedWS.toUpperCase();
     }
     //if the instrument is null or undefined
-    if (this.newInstrument === ''|| this.newInstrument === undefined){
+    else if (this.newInstrument === ''|| this.newInstrument === undefined){
       alert("Please Enter The New Instrument")
     }
     //if the new IP is null or undefined
-    if (this.newIP === '' || this.newIP === undefined){
+    else if (this.newIP === '' || this.newIP === undefined){
       alert("Please Enter The IP Address")
     }
     //if choice is yes and weather station is exised in the list.
@@ -84,7 +84,8 @@ export class NewComponent implements OnInit {
       if (addGrant == true){
     //init loading signal
     const loading = await this.loadingController.create();
-    this.deviceService.addDevice(this.selectedWS.toUpperCase(), this.newInstrument, this.newIP);
+    this.selectedWS = this.selectedWS.toUpperCase();
+    this.deviceService.addDevice(this.selectedWS.toUpperCase(), this.newInstrument, this.newIP, this.selectedManaged);
     this.syslogService.systemLogNewDevice(this.selectedWS.toUpperCase(), this.newInstrument, this.newIP);
     await loading.dismiss();
     //alert the user

@@ -31,27 +31,7 @@ export class SyslogService {
     }
   }
 
-  systemLogAllDeviceAutoUpdate(status: string, ws: string){
-    if(status == 'on'){
-      this.deviceService.updateAllDeviceOn(ws)
-      this.firestore.collection('systemLog').ref.add({
-        date: this.timestamp,
-        ws: ws,
-        instrument: 'All',
-        action: 'Turn On',
-        comment:'Auto'
-      })
-    } else if(status == 'off'){
-      this.deviceService.updateAllDeviceOff(ws)
-      this.firestore.collection('systemLog').ref.add({
-        date: this.timestamp,
-        ws: ws,
-        instrument: 'All',
-        action: 'Turn Off',
-        comment:'Auto'
-      })
-    }
-  }
+
 
 
   systemLogSingleDeviceManualOn(ws: string, instrument: string){
@@ -92,6 +72,7 @@ export class SyslogService {
     })
   }
 
+
   systemLogNewDevice(ws: string, instrument: string, newIP: string){
     this.firestore.collection('systemLog').ref.add({
       date: this.timestamp,
@@ -103,8 +84,9 @@ export class SyslogService {
   }
 
 
+
   getSystemLog(){
-    //Get device from firestore
+    //Get system log from firestore
     let systemLogs = []
     this.firestore.collection('systemLog').ref.orderBy('date', 'desc').get().then((user) => {user.forEach((doc =>{
       systemLogs.push({
@@ -117,7 +99,7 @@ export class SyslogService {
         })
       )}
     )
-    // return device
+    // return system log
     return systemLogs;
   }
   

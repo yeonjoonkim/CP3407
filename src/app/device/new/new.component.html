@@ -28,6 +28,12 @@
         <ion-label> Add New Weather Station</ion-label>
         <ion-input [(ngModel)]="selectedWS" placeholder="Please Enter New WS"></ion-input>
     </ion-item>
+    <ion-item *ngIf="selectedWS.length > 0">
+        <ion-label> Managed By</ion-label>
+        <ion-select [(ngModel)]="selectedManaged">
+            <ion-select-option *ngFor="let m of MANAGEDBY" [value]="m">{{m}}</ion-select-option>
+        </ion-select>
+    </ion-item>
 
     <ion-item *ngIf="selectedWS.length > 0">
         <ion-label> Add New Instrument</ion-label>

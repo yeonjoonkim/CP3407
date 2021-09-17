@@ -42,6 +42,10 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
     // navigate to the home page
     this.router.navigateByUrl('nav/home', {replaceUrl: true})
+          setTimeout(() => {
+        window.location.reload();
+      }, 500);
+
    } else{
      //finish the loading
      await loading.dismiss();
