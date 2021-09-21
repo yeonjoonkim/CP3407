@@ -38,13 +38,13 @@ export class AuthenticationService {
   }
 
   getIP(){
-    this.getIPAddress().subscribe((res:any)=>{
-      this.ipAddress = res.ip;
-    });
+    fetch(this.url)
+    .then(response=>response.json())
+    .then(data=> {
+      this.ipAddress = data.ip
+     })
   }
-  getIPAddress(){
-    return this.http.get(this.url)
-  }
+
   userList(){
     //Get userProfile from firestore
     let userList = []

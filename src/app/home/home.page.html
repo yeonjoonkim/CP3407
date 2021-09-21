@@ -12,9 +12,77 @@
 
 <ion-content class="main">
 
-    <ion-segment [(ngModel)]="selectedChoice" (click)="setChoice(); ">
-        <ion-segment-button *ngFor="let c of choice;" [value]="c">
-            {{c}}
-        </ion-segment-button>
-    </ion-segment>
+    <swiper #swiper [config]="config" [allowTouchMove]="true">
+        <ng-template swiperSlide>
+            <h1>Current Weather</h1>
+            <h3>Location: {{openWeatherData.location}}</h3>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <h5>Last Updated: </h5>
+                    </ion-col>
+                    <ion-col>
+                        <h6>{{openWeatherData.lastUpdate| date: 'dd/MMM/yy'}} {{openWeatherData.lastUpdate | date: 'h:mm a'}} </h6>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <h5>Temperature: </h5>
+                    </ion-col>
+                    <ion-col>
+                        <h6>{{openWeatherData.currentTemp}} °C </h6>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <h5>Wind Speed: </h5>
+                    </ion-col>
+                    <ion-col>
+                        <h6>{{openWeatherData.currentWindSpeed}} km/h</h6>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <h5>Rain Fall: </h5>
+                    </ion-col>
+                    <ion-col>
+                        <h6>{{rainFall}} mm/h</h6>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <h5>Humidity: </h5>
+                    </ion-col>
+                    <ion-col>
+                        <h6>{{openWeatherData.humidity}}%</h6>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="btn-box">
+                    <ion-button (click)='next()' fill="clear">Next</ion-button>
+                </ion-row>
+            </ion-grid>
+
+
+        </ng-template>
+
+        <ng-template swiperSlide>
+            <h1>Weather Forcast</h1>
+            <ion-grid>
+
+            </ion-grid>
+            <ion-row class="btn-box">
+                <ion-button (click)='back()' fill="clear">Back</ion-button>
+            </ion-row>
+        </ng-template>
+    </swiper>
+
+    <div class="interval-box">
+        <ion-label>Interval Setting</ion-label>
+        <ion-segment [(ngModel)]="selectedChoice" (click)="setChoice(); ">
+
+            <ion-segment-button *ngFor="let c of choice;" [value]="c">
+                {{c}}
+            </ion-segment-button>
+        </ion-segment>
+    </div>
 </ion-content>

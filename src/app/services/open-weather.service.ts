@@ -34,14 +34,14 @@ export class OpenWeatherService {
 
 
     if (hourlyRain === undefined || hourlyRain === null){
-      hourlyRain = {'1h': 0}
+      hourlyRain = {'1h': 0};
     }
     displayData = {lastUpdate: timestamp, location: location, sunriseTime: sunriseTime, sunsetTime: sunsetTime,
     currentTemp: currentTemp, currentWindSpeed: currentWindSpeed, currentWindDeg: currentWindDeg, 
     hourlyRain: hourlyRain, humidity: humidity,
     }
-    this.weatherLog.addWeatherLog('openWeather', timestamp, location, currentTemp, currentWindSpeed, humidity, hourlyRain)
     this.stroage.set("OPENWEATHER", displayData)
+    this.weatherLog.addWeatherLog('openWeather', timestamp, location, currentTemp, currentWindSpeed, humidity, hourlyRain)
     setTimeout(() => {
     }, 1000);
   }
