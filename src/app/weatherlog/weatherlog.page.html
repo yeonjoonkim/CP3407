@@ -8,8 +8,60 @@
         </ion-buttons>
 
     </ion-toolbar>
+    <ion-list>
+        <ion-item class="info_title">
+            <ion-label>
+                Date
+            </ion-label>
+            <ion-label>
+                Time
+            </ion-label>
+            <ion-label>
+                Location
+            </ion-label>
+            <ion-label>
+                Temperature
+            </ion-label>
+            <ion-label>
+                Wind Speed
+            </ion-label>
+            <ion-label>
+                Humidity
+            </ion-label>
+            <ion-label>
+                Rain
+            </ion-label>
+        </ion-item>
+    </ion-list>
 </ion-header>
 
 <ion-content class="main">
-    <!-- Content -->
+    <ion-infinite-scroll>
+        <ion-list *ngFor="let info of WEATHERLOG">
+
+            <ion-item class="user_info">
+                <ion-label>
+                    {{info.timestamp.toDate() | date: 'dd/MM/yy'}}
+                </ion-label>
+                <ion-label>
+                    {{info.timestamp.toDate() | date: 'h:mm a'}}
+                </ion-label>
+                <ion-label>
+                    {{info.location}}
+                </ion-label>
+                <ion-label>
+                    {{info.temp}}
+                </ion-label>
+                <ion-label>
+                    {{info.wind}}
+                </ion-label>
+                <ion-label>
+                    {{info.humidity}}
+                </ion-label>
+                <ion-label>
+                    {{info.rain}}
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-infinite-scroll>
 </ion-content>

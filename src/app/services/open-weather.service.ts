@@ -1,6 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { WeatherCheckService } from './weather-check.service';
 import { WeatherLogService } from './weather-log.service';
 
 
@@ -12,7 +11,7 @@ export class OpenWeatherService {
   //Setting apiKey
   private apiKey = 'bbf1afadff8791a5f0b13584a3be32d9';
 
-  constructor(private stroage: Storage, private weather: WeatherCheckService, private weatherLog: WeatherLogService) {
+  constructor(private stroage: Storage, private weatherLog: WeatherLogService) {
   }
 
   async OnInit(){
@@ -31,16 +30,18 @@ export class OpenWeatherService {
     let currentWindDeg = data.wind.deg;
     let hourlyRain = data.rain;
     let humidity = data.main.humidity;
-
+    let lat = data.coord.lat;
+    let lon = data.coord.lon;
 
     if (hourlyRain === undefined || hourlyRain === null){
       hourlyRain = {'1h': 0};
     }
     displayData = {lastUpdate: timestamp, location: location, sunriseTime: sunriseTime, sunsetTime: sunsetTime,
     currentTemp: currentTemp, currentWindSpeed: currentWindSpeed, currentWindDeg: currentWindDeg, 
-    hourlyRain: hourlyRain, humidity: humidity,
+    hourlyRain: hourlyRain, humidity: humidity, lat: lat, lon: lon
     }
     this.stroage.set("OPENWEATHER", displayData)
+
     this.weatherLog.addWeatherLog('openWeather', timestamp, location, currentTemp, currentWindSpeed, humidity, hourlyRain)
     setTimeout(() => {
     }, 1000);

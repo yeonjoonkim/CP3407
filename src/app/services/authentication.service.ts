@@ -3,7 +3,6 @@ import { BehaviorSubject} from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DeviceDetectorService } from "ngx-device-detector";
-import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +10,11 @@ import { HttpClient } from "@angular/common/http";
 export class AuthenticationService {
   //check is Authenticated
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
-  private url = "http://api.ipify.org/?format=json";
+  private url = "https://api64.ipify.org/?format=json";
   private ipAddress:string; 
   private deviceInfo = null;
   private timestamp: Date = new Date();
-  constructor(private storage: Storage, private firestore: AngularFirestore, private device: DeviceDetectorService, private http: HttpClient) {
+  constructor(private storage: Storage, private firestore: AngularFirestore, private device: DeviceDetectorService) {
     this.loadToken();
     this.checkDevice();
     this.getIP();
@@ -37,8 +36,8 @@ export class AuthenticationService {
     )
   }
 
-  getIP(){
-    fetch(this.url)
+  async getIP(){
+    await fetch(this.url)
     .then(response=>response.json())
     .then(data=> {
       this.ipAddress = data.ip

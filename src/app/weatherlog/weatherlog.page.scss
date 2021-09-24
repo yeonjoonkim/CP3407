@@ -11,3 +11,26 @@ ion-toolbar {
         color: #7EF9FF;
     }
 }
+
+.info_title {
+    --background: #332D31;
+    color: orange;
+    text-align: center;
+    font-size: 15px;
+}
+
+.info_title::after {
+    --background: #332D31;
+}
+
+.user_info::after {
+    --background: #332D31;
+}
+
+.user_info {
+    --background: #332D31;
+    color: #7EF9FF;
+    border-width: thin;
+    text-align: center;
+    font-size: 15px;
+}

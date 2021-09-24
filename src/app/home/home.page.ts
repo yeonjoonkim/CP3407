@@ -26,10 +26,12 @@ export class HomePage {
 
 
   openWeatherData: any= [];
+  forecastWeahterData: any= [];
   choice = ['START', 'STOP']
   selectedChoice: string;
   rainFall: number;
-  constructor(private storage: Storage, private openWeather: OpenWeatherService, private weather: WeatherCheckService) {    
+  constructor(private storage: Storage, private openWeather: OpenWeatherService,
+    private weather: WeatherCheckService) {    
   }
 
   ngAfterContentChecked() {
@@ -51,9 +53,12 @@ export class HomePage {
       this.openWeatherData = val
       this. rainFall = this.weather.rainValue(val.hourlyRain)
     })
+    this.storage.get("WEATHERBIT").then(val => {
+      this.forecastWeahterData = val
+    })
     this.storage.get("CHECK").then(val => {
       this.selectedChoice = val.toUpperCase();
-    })
+    });
   }
 
 

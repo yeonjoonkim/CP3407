@@ -66,10 +66,46 @@
         </ng-template>
 
         <ng-template swiperSlide>
-            <h1>Weather Forcast</h1>
-            <ion-grid>
+            <h1>Weekly Weather Forecast</h1>
+            <ion-list>
+                <ion-item class="info_title">
+                    <ion-label>
+                        Date
+                    </ion-label>
+                    <ion-label>
+                        Min Temp
+                    </ion-label>
+                    <ion-label>
+                        Max Temp
+                    </ion-label>
+                    <ion-label>
+                        Wind SPD
+                    </ion-label>
+                    <ion-label>
+                        Cloud
+                    </ion-label>
+                </ion-item>
+            </ion-list>
 
-            </ion-grid>
+            <ion-list *ngFor="let forecast of forecastWeahterData">
+                <ion-item class="user_info">
+                    <ion-label>
+                        {{forecast.date}}
+                    </ion-label>
+                    <ion-label>
+                        {{forecast.min_temp}}°C
+                    </ion-label>
+                    <ion-label>
+                        {{forecast.max_temp}}°C
+                    </ion-label>
+                    <ion-label>
+                        {{forecast.wind_speed}} km/h
+                    </ion-label>
+                    <ion-label>
+                        {{forecast.clouds}}%
+                    </ion-label>
+                </ion-item>
+            </ion-list>
             <ion-row class="btn-box">
                 <ion-button (click)='back()' fill="clear">Back</ion-button>
             </ion-row>

@@ -125,6 +125,8 @@ export class DeviceService {
             comment:'Auto'
             })
           }
+          setTimeout(() => {
+          }, 900);
         }
     })
   }
@@ -153,6 +155,8 @@ export class DeviceService {
             comment:'Auto'
             })
           }
+          setTimeout(() => {
+          }, 900);
         }
     })
   }

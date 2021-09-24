@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { WeatherCheckService } from './services/weather-check.service';
 import { OpenWeatherService } from './services/open-weather.service';
+import { WeatherbitService } from './services/weatherbit.service';
 import { DeviceService } from './services/device.service';
 import { ToastController } from '@ionic/angular';
 
@@ -15,7 +16,10 @@ import { ToastController } from '@ionic/angular';
 export class AppComponent {
   status: string
   items: Observable<any[]>;
-  constructor(private storage: Storage, private openWeather: OpenWeatherService, private weather: WeatherCheckService,private device: DeviceService, private toastCtrl: ToastController) {
+  constructor(private storage: Storage, private openWeather: OpenWeatherService, 
+    private weather: WeatherCheckService,private device: DeviceService, private toastCtrl: ToastController,
+    private weatherBit: WeatherbitService
+    ) {
   }
 
     async ngOnInit() {
@@ -26,6 +30,7 @@ export class AppComponent {
         if (val === null || val === undefined){
           this.storage.set("SETTING", {interval: 15, max_temp: 39.5, max_wind: 10, max_rain: 10, max_humidity: 60, city: 'cairns'})
           this.openWeather.getWeatherData('cairns');
+          this.weatherBit.getForecastData('cairns');
         }
       });
       this.storage.get("CHECK").then(val =>{
@@ -54,6 +59,7 @@ export class AppComponent {
               this.storage.get("CHECK").then(check =>{
                 if(check == 'start'){
                 this.openWeather.getWeatherData(setting.city);
+                this.weatherBit.getForecastData(setting.city);
                   this.storage.get("OPENWEATHER").then(data =>{
                     let rainValue = this.weather.rainValue(data.hourlyRain);
                     let temp = this.weather.check(data.currentTemp, setting.max_temp);
@@ -75,13 +81,14 @@ export class AppComponent {
                         setTimeout(() => {
                         }, 900);
                       }
-                    })
+                    });
+                
                   }
                 if(check == 'stop'){
                   clearInterval(interval);
                 }
               })
-        }, 1000 * 60 *setting.interval);}) // 
+        }, 1000 * 60 * setting.interval);})
       }
     });
     }
