@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 //SwipeModule
-import{SwiperModule} from 'swiper/angular'
+import{SwiperModule} from 'swiper/angular';
 
 //firebase moudle
 import { AngularFireModule } from '@angular/fire/compat';

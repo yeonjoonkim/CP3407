@@ -88,14 +88,15 @@ export class AppComponent {
                   clearInterval(interval);
                 }
               })
-        }, 1000 * 60 * setting.interval);})
+        }, 1000 * 60 * setting.interval);
+      })
       }
     });
     }
 
 }
 
-//test
+// test
 // console.log(temp, wind, humidity, rain)
 // console.log("current Temp: " + data.currentTemp + " max: " + setting.max_temp)
 // console.log("current Wind: " + data.currentWindSpeed + " max: " + setting.max_wind)
