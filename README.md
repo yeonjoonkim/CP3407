@@ -17,9 +17,9 @@
 
 #### Prerequisite
 - Node.js [Link to Download](https://nodejs.org/en/download/) 
-'node -v' is helpful to check the setting.
+`node -v` is helpful to check the setting.
 - npm [Link to Guideline](https://docs.npmjs.com/cli/v6/commands/npm-install) 
-'npm -v' is helpful to check the setting.
+`npm -v` is helpful to check the setting.
 - Gradle [Link to Download](https://gradle.org/releases/) 
 Please download the "binary-only"
 
@@ -29,29 +29,28 @@ Please download the "binary-only"
 
 #### Installation of Ionic Angular
 
-'npm install'
-'npm install -g cordova'
-'npm install -g ionic@latest'
-'ionic -v' to check the version of ionic
-'git clone https://github.com/yeonjoonkim/remoteControl.git remoteControl'
+- `npm install`
+- `npm install -g cordova`
+- `npm install -g ionic@latest`
+- `ionic -v` to check the version of ionic
+- `git clone https://github.com/yeonjoonkim/remoteControl.git remoteControl`
 
 
 [Back To The Top](#advance-software-assessment)
 
 
 ## How to use
-'remoteControl'
-'ionic serve'
-'Install @angular/cli? Yes 
-npm.cmd i -D -E @angular/cli' 
+- `remoteControl`
+- `ionic serve`
+- `@angular/cli? Yes` 
 
 
 - Login ID: admin
 - Login Password: admin
 
-#### Problem solved [ERROR] [ERROR] ng has unexpectedly closed (exit code 1).
-- Please delete 'node_modules' file
-- 'npm install'
+#### Problem solved [ERROR] ng has unexpectedly closed (exit code 1).
+- Please delete `node_modules` file
+- `npm install`
 
 
 [Back To The Top](#advance-software-assessment)
