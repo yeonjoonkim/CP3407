@@ -28,7 +28,7 @@ export class AppComponent {
       //check if the setting has setted up
       this.storage.get("SETTING").then(val =>{
         if (val === null || val === undefined){
-          this.storage.set("SETTING", {interval: 15, max_temp: 39.5, max_wind: 10, max_rain: 10, max_humidity: 60, city: 'cairns'})
+          this.storage.set("SETTING", {interval: 15, max_temp: 39.5, max_wind: 10, max_rain: 10, max_humidity: 80, city: 'cairns'})
           this.openWeather.getWeatherData('cairns');
           this.weatherBit.getForecastData('cairns');
         }
@@ -50,10 +50,14 @@ export class AppComponent {
       });
     }
 
-    //TOD0
     startInterval(){
+      this.storage.get("TOKEN_KEY").then(token =>{
+        console.log(token)
+        if(token == 'true'){
         this.storage.get("SETTING").then(setting =>{
+          console.log(setting.interval)
         const interval: ReturnType<typeof setInterval> = setInterval(() => {
+          console.log(interval)
               this.storage.get("CHECK").then(check =>{
                 if(check == 'start'){
                 this.openWeather.getWeatherData(setting.city);
@@ -91,10 +95,11 @@ export class AppComponent {
                   clearInterval(interval);
                 }
               })
-        }, 1000 * 60 *setting.interval);
+        }, 1000 * 60 * setting.interval);
       })
     }
-
+  }
+      )};
 }
 
 // test
