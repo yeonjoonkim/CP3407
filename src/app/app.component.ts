@@ -52,8 +52,6 @@ export class AppComponent {
 
     //TOD0
     startInterval(){
-      this.storage.get("TOKEN_KEY").then(token =>{
-        if(token == 'true'){
         this.storage.get("SETTING").then(setting =>{
         const interval: ReturnType<typeof setInterval> = setInterval(() => {
               this.storage.get("CHECK").then(check =>{
@@ -66,6 +64,11 @@ export class AppComponent {
                     let wind = this.weather.check(data.currentWindSpeed, setting.max_wind);
                     let humidity = this.weather.check(data.humidity, setting.max_humidity);
                     let rain = this.weather.check(rainValue, setting.max_rain)
+                    console.log(temp, wind, humidity, rain)
+                    console.log("current Temp: " + data.currentTemp + " max: " + setting.max_temp)
+                    console.log("current Wind: " + data.currentWindSpeed + " max: " + setting.max_wind)
+                    console.log("current Humdit: " + data.humidity + " max: " + setting.max_humidity)
+                    console.log("current Rain: " + rainValue + " max: " + setting.max_rain)
                     //insert here to test
                     if(temp || wind || humidity || rain){
                       this.device.AutoDeviceOff('openWeather');
@@ -88,17 +91,10 @@ export class AppComponent {
                   clearInterval(interval);
                 }
               })
-        }, 1000 * 60 * setting.interval);
+        }, 1000 * 60 *setting.interval);
       })
-      }
-    });
     }
 
 }
 
 // test
-// console.log(temp, wind, humidity, rain)
-// console.log("current Temp: " + data.currentTemp + " max: " + setting.max_temp)
-// console.log("current Wind: " + data.currentWindSpeed + " max: " + setting.max_wind)
-// console.log("current Humdit: " + data.humidity + " max: " + setting.max_humidity)
-// console.log("current Rain: " + rainValue + " max: " + setting.max_humidity)
