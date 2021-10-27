@@ -10,6 +10,7 @@
 ---
 
 ## Description
+Remote Control application to control weather stations and check instrument status of particular weather stations. Also has the ability to view weather forecasts.
 
 ---
 
