@@ -62,6 +62,18 @@ Please download the "binary-only"
 
 ### API Reference
 
+- Openweather https://openweathermap.org/
+The openweather API is used for receiving the current weather data to monitor, analyze, and modify the condition of the registered devices.
+
+- Weatherbit
+The weatherbit API is used for receiving the 5 days forecast weather data to display the weather on the home page.
+
+- api64.ipify.org
+The api64.ipify.org API used for receiving the user’s IP address for tracking the address to monitor, analyse the behaviour of the login statement to prevent the attack.
+
+- Ngx-device-detector
+The ngx-device-detector allows the device information to record in the login log to monitor what types of devices have or attempted to login.
+
 
 [Back To The Top](#advance-software-assessment)
 
