@@ -42,6 +42,7 @@ Please download the "binary-only"
 
 ## How to use
 - `remoteControl`
+- `npm install`
 - `ionic serve`
 - `@angular/cli? Yes` 
 
@@ -52,6 +53,18 @@ Please download the "binary-only"
 #### Problem solved [ERROR] ng has unexpectedly closed (exit code 1).
 - Please delete `node_modules` file
 - `npm install`
+
+#### Problem solved [ERROR] ng has unexpectedly closed (exit code 127).
+
+- `rm -r node_modules`
+- `npm install`
+- `npm aduit fix --force`
+- `ionic serve`
+
+#### Problem solved [ERROR] An unhandled exception occurred: Cannot find module ‘@angular-devkit/build-angualr/package.json’
+
+- `npm install --save-dev @angular-devkit/build-angular`
+- `ionic serve`
 
 
 [Back To The Top](#advance-software-assessment)
@@ -77,14 +90,3 @@ The ngx-device-detector allows the device information to record in the login log
 
 [Back To The Top](#advance-software-assessment)
 
-
----
-
-
-## References
-
-
-[Back To The Top](#advance-software-assessment)
-
-
----
