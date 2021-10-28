@@ -9,24 +9,33 @@ ion-toolbar {
 }
 
 .swiper-container {
-    margin-top: 20px;
-    background-color: #57026f;
+  margin-top: 20px;
+  background-color: #57026f;
+  color: #7EF9FF;
+  height: 500px;
+  width: 400px;
+
+  h1 {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  ion-button {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
     color: #7EF9FF;
-    height: 500px;
-    width: 400px;
-    h1 {
-        text-align: center;
-    }
-    h3 {
-        text-align: center;
-    }
-    ion-button {
-        margin-bottom: 10px;
-        text-align: center;
-        font-size: 25px;
-        font-weight: bold;
-        color: #7EF9FF;
-    }
+  }
+
+  .header {
+    background-color: #350343;
+    padding: 15px;
+  }
 }
 
 .btn-box {
