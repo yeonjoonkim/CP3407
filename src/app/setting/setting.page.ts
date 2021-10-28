@@ -9,7 +9,7 @@ import {AlertController, LoadingController} from '@ionic/angular';
   styleUrls: ['./setting.page.scss'],
 })
 export class SettingPage implements OnInit {
-  intervals: any[] = [{ id:15, name: "15 Minitues"},{id:30,name: "30 Minitues"},{id:60,name: "1 Hour"},{id:120,name: "2 Hours"}];
+  intervals: any[] = [{ id:15, name: "15 Minutes"},{id:30,name: "30 Minutes"},{id:60,name: "1 Hour"},{id:120,name: "2 Hours"}];
   interval: number;
   max_temp: number;
   max_wind: number;
